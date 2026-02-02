@@ -1,47 +1,178 @@
+
 <!DOCTYPE html>
 <html lang="da">
 <head>
-    <meta charset="UTF-8">
-    <title>Vigtigt link</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f6f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .box {
-            background: white;
-            padding: 2.5rem 3rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            text-align: center;
-            max-width: 420px;
-        }
-        h1 {
-            margin-top: 0;
-        }
-        .emoji {
-            font-size: 2rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Remote Control</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #0b0f14;
+        font-family: Consolas, monospace;
+        color: #e6e6e6;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #box {
+        background: #111;
+        border: 1px solid #333;
+        padding: 25px 30px;
+        width: 420px;
+        box-shadow: 0 0 25px rgba(0,255,0,0.15);
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: 18px;
+        color: #9eff9e;
+    }
+
+    p {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+    }
+
+    button {
+        background: #1a1a1a;
+        color: #e6e6e6;
+        border: 1px solid #444;
+        padding: 8px 20px;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    button:hover {
+        background: #222;
+    }
+
+    #cmd {
+        position: fixed;
+        inset: 0;
+        background: black;
+        color: #00ff00;
+        padding: 20px;
+        font-size: 13px;
+        display: none;
+        overflow-y: auto;
+        white-space: pre-wrap;
+    }
+
+    .progress {
+        margin-top: 10px;
+        width: 100%;
+        height: 8px;
+        background: #003300;
+    }
+
+    .bar {
+        height: 100%;
+        width: 0%;
+        background: #00ff00;
+    }
+</style>
 </head>
+
 <body>
-    <div class="box">
-        <div class="emoji">🫠</div>
-        <h1>Skulle ikke have klikket</h1>
-        <p>
-            Dette link var meget vigtigt.<br>
-            Bare ikke for dig.
-        </p>
-        <p>
-            Næste gang: tænk.<br>
-            Kærlig hilsen IT ❤️
-        </p>
+
+<div id="box">
+    <h2>Vil du tillade remote control?</h2>
+    <p>
+        ⚠️ Indgående session fra ekstern klient<br>
+        Bruger: <strong>root@nx‑gate‑07</strong><br>
+        IP: <strong>185.91.203.44</strong>
+    </p>
+
+    <p style="color:#ff6b6b">
+        Denne handling kan give fuld adgang til din computer.
+    </p>
+
+    <div class="buttons">
+        <button onclick="startHack()">Ja</button>
+        <button onclick="startHack()">Nej</button>
     </div>
+</div>
+
+<div id="cmd">
+    <div id="cmdText"></div>
+
+    <div class="progress">
+        <div class="bar" id="bar"></div>
+    </div>
+</div>
+
+<script>
+const lines = [
+"[ OK ] Initializing remote session",
+"[ OK ] Loading kernel modules",
+"[ OK ] Establishing encrypted tunnel",
+"[ OK ] Bypassing local firewall rules",
+"[ OK ] Injecting session token",
+"[ OK ] Mounting user directories",
+"[ OK ] Enumerating devices",
+"[ OK ] Capturing input stream",
+"[ OK ] Syncing clipboard",
+"[ OK ] Escalating privileges",
+"[ OK ] Access granted",
+"[ OK ] Downloading payload (node-bridge)",
+"[ OK ] Verifying checksum",
+"[ OK ] Installing persistence module",
+"[ OK ] Modifying registry entries",
+"[ OK ] Hooking system processes",
+"[ OK ] Connecting to C2 server",
+"[ OK ] Uploading system profile",
+"[ OK ] Scanning network",
+"[ OK ] Dumping credentials",
+"[ OK ] Session stabilized",
+"[ OK ] Monitoring activity",
+"[ OK ] Awaiting commands...",
+"[ OK ] Awaiting commands...",
+"[ OK ] Awaiting commands...",
+"[ OK ] Awaiting commands...",
+"[ OK ] Awaiting commands...",
+"[ OK ] Awaiting commands..."
+];
+
+let lineIndex = 0;
+let progress = 0;
+
+function startHack() {
+    document.getElementById("box").style.display = "none";
+    document.getElementById("cmd").style.display = "block";
+
+    const text = document.getElementById("cmdText");
+    const bar = document.getElementById("bar");
+
+    const interval = setInterval(() => {
+        // skriv tekst
+        if (lineIndex < lines.length) {
+            text.textContent += lines[lineIndex] + "\n";
+            lineIndex++;
+            document.getElementById("cmd").scrollTop = document.getElementById("cmd").scrollHeight;
+        }
+
+        // progress bar
+        if (progress < 100) {
+            progress += 1.5;
+            bar.style.width = progress + "%";
+        }
+
+        // stop ALDRIG – keep hacker vibes
+        if (lineIndex >= lines.length) {
+            text.textContent += "[ OK ] Awaiting commands...\n";
+        }
+    }, 70);
+}
+</script>
+
 </body>
 </html>
